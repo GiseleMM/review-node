@@ -1,0 +1,1 @@
+si el archivo no existe lo crea y agrega el contenido,si exite solo agrega contenidoSi es asincrona necesita un callback como tercer argumento

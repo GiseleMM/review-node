@@ -1,0 +1,4 @@
+#**/node_modules/: Este patrón le indica a Git que ignore todas las carpetas node_modules dentro de cualquier subdirectorio, sin importar cuántos niveles de profundidad haya.
+
+**/node_modules/
+**.env
