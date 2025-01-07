@@ -1057,6 +1057,7 @@ await addItemCSV("3,andres,28", "user.csv");
   await addItemCSV("4,tomas,56", "user.csv");
 })();
 ```
+
 #### Eliminar archivo con unlink()
 
 ```js
@@ -1064,36 +1065,33 @@ async function deleteFile(path) {
   try {
     await fs.unlink(path);
     // se pasa la ruta del archivo q desea eliminar, NO envia a la papelera sino q elimina de forma permanente del sistema
-    
   } catch (error) {
-    console.log("Error en eliminacion de archivo:",error.message);
+    console.log("Error en eliminacion de archivo:", error.message);
   }
-  
 }
-deleteFile("user.csv");// si no se indica ruta se busca el la carpeta donde se ejecuta el codigo
+deleteFile("user.csv"); // si no se indica ruta se busca el la carpeta donde se ejecuta el codigo
 ```
 
 #### Mover archivos con rename()
 
-Puedes usar la funcion  rename() para mover   un archivo a una nueva carpeta.
-,se debe proporcionar la rurta del archivo original y la rurta de la ubicacion de 
+Puedes usar la funcion rename() para mover un archivo a una nueva carpeta.
+,se debe proporcionar la rurta del archivo original y la rurta de la ubicacion de
 destino.
 
 ```js
-
-async function moveFile(source,destination)
-{
+async function moveFile(source, destination) {
   try {
-    await fs.rename(source,destination);
-    console.log("archivo movido desde "+source+" a "+destination);
+    await fs.rename(source, destination);
+    console.log("archivo movido desde " + source + " a " + destination);
   } catch (error) {
-    console.log("Ocurrio error en mover archivo",error.message);
+    console.log("Ocurrio error en mover archivo", error.message);
   }
 }
-moveFile("copy-test.txt","./move/newname.txt");//se mueve de la ubicacion original y se colaco en el destino con el nombre indicado
+moveFile("copy-test.txt", "./move/newname.txt"); //se mueve de la ubicacion original y se colaco en el destino con el nombre indicado
 ```
 
 ### Módulo FS
+
 FS es el módulo integrado de node que ´permite interactuar con el sistema de archivo mediante JS. Todas las operaciones de archivos tinene formas sincrónica,de callaback y basadas en promesas y se puede acceder a ellas mediante la Sintaxis CommonJS y los ES Modulo6
 
 ```js
@@ -1114,135 +1112,145 @@ fs.readFile("test-lectura.txt", (error, data) => {
 });
 console.log("Fin lectura asincronica");
 
-
 //CREACION
 
 //APPENDFILE
- console.log("Inicio creacion archivo sincronica");
- fs.appendFileSync("appendFile.txt","si el archivo no existe lo crea y agrega el contenido,si exite solo agrega contenido");
- console.log("Fin creacion archivo sincronica");
+console.log("Inicio creacion archivo sincronica");
+fs.appendFileSync(
+  "appendFile.txt",
+  "si el archivo no existe lo crea y agrega el contenido,si exite solo agrega contenido"
+);
+console.log("Fin creacion archivo sincronica");
 
-
- console.log("Inicio creacion archivo Asincronica");
- fs.appendFileSync(   "appendFile.txt",
-   "Si es asincrona necesita un callback como tercer argumento",
-   function (err) {
-     if (err) console.log(err.message);
-   }
- );
- console.log("Fin creacion archivo asincronica");
-
+console.log("Inicio creacion archivo Asincronica");
+fs.appendFileSync(
+  "appendFile.txt",
+  "Si es asincrona necesita un callback como tercer argumento",
+  function (err) {
+    if (err) console.log(err.message);
+  }
+);
+console.log("Fin creacion archivo asincronica");
 
 //OPEN
- console.log("Inicio cracion con open syncronico");
- fs.openSync("opensync.txt","w");// segundo argumento es una bandera  q especifica el modo de apertura, w indica escritura y si no exite lo crea vacio
- console.log("Fin cracion con open syncronico");
+console.log("Inicio cracion con open syncronico");
+fs.openSync("opensync.txt", "w"); // segundo argumento es una bandera  q especifica el modo de apertura, w indica escritura y si no exite lo crea vacio
+console.log("Fin cracion con open syncronico");
 
- console.log("Inicio cracion con open Asyncronico");
- fs.open("openasync.txt","w",(error,file)=>{
-   if(error)console.log("Error en creacion de archivo");
- });// segundo argumento es una bandera  q especifica el modo de apertura, w indica escritura y si no exite lo crea vacio, 3 argumeto callback error
- console.log("Fin cracion con open Asyncronico");
+console.log("Inicio cracion con open Asyncronico");
+fs.open("openasync.txt", "w", (error, file) => {
+  if (error) console.log("Error en creacion de archivo");
+}); // segundo argumento es una bandera  q especifica el modo de apertura, w indica escritura y si no exite lo crea vacio, 3 argumeto callback error
+console.log("Fin cracion con open Asyncronico");
 
-//WRITEFILE 
+//WRITEFILE
 //método remplaza el archivo y el contenido si exite, si no existe se creara un nuevo archivo con el contenido
-  console.log("Inicio creacion con writeFile syncronico");
-  fs.writeFileSync("writefilesync.txt","contenido de writeFileSync");
-  console.log("Fin creacion con writeFile syncronico");
+console.log("Inicio creacion con writeFile syncronico");
+fs.writeFileSync("writefilesync.txt", "contenido de writeFileSync");
+console.log("Fin creacion con writeFile syncronico");
 
-  console.log("Inicio creacion con writeFile Asyncronico");
-  fs.writeFile("writefileasync.txt","contenido de writeFile (asincrono)",function(err){
-   if(err)console.log("Error en creacion de archivo");
-  });
-  console.log("Fin creacion con writeFile Asyncronico");
-  
+console.log("Inicio creacion con writeFile Asyncronico");
+fs.writeFile(
+  "writefileasync.txt",
+  "contenido de writeFile (asincrono)",
+  function (err) {
+    if (err) console.log("Error en creacion de archivo");
+  }
+);
+console.log("Fin creacion con writeFile Asyncronico");
 
 //ACTUALIZAR ARCHIVOS
 
 //APPENDFILE Agrega el contenido del 2°argumento al final del archivo especificado en el 1° arg
 
- console.log("Inicio actulizacion con appendFileSync");
- fs.appendFileSync("opensync.txt","appendFileSync contenido append");
- console.log("Fin actulizacion con appendFileSync");
+console.log("Inicio actulizacion con appendFileSync");
+fs.appendFileSync("opensync.txt", "appendFileSync contenido append");
+console.log("Fin actulizacion con appendFileSync");
 
- console.log("Inicio actulizacion con appendFile asincronico");
- fs.appendFileSync("opensync.txt","appendFile contenido append asincronico",function(e){
-   if(e)console.log("Error en append a archivo");
- });
- console.log("Fin actulizacion con appendFile asincronico");
+console.log("Inicio actulizacion con appendFile asincronico");
+fs.appendFileSync(
+  "opensync.txt",
+  "appendFile contenido append asincronico",
+  function (e) {
+    if (e) console.log("Error en append a archivo");
+  }
+);
+console.log("Fin actulizacion con appendFile asincronico");
 
 //ELIMINAR ARCHIVO
- console.log("Inicio eliminacion sincrónica");
- fs.unlinkSync("opensync.txt");
- console.log("fin eliminacion sincrónica");
+console.log("Inicio eliminacion sincrónica");
+fs.unlinkSync("opensync.txt");
+console.log("fin eliminacion sincrónica");
 
-
- console.log("Fin eliminacion Asincrónica");
- fs.unlink("openasync.txt",(err)=>{
-   if(err) console.log("Error en eliminacion de archivo");
- });
- console.log("fin eliminacion Aincrónica");
-
+console.log("Fin eliminacion Asincrónica");
+fs.unlink("openasync.txt", (err) => {
+  if (err) console.log("Error en eliminacion de archivo");
+});
+console.log("fin eliminacion Aincrónica");
 
 //CAMBIAR NOMBRE
 console.log("Inicio cambio de nombre sincrono");
-fs.renameSync("writefileasync.txt","writeFileAsync.txt");
+fs.renameSync("writefileasync.txt", "writeFileAsync.txt");
 console.log("Fin cambio de nombre sincrono");
 
 console.log("Inicio cambio de nombre asincrono");
-fs.renameSync("writefilesync.txt","writeFileSync.txt");
+fs.renameSync("writefilesync.txt", "writeFileSync.txt");
 console.log("Fin cambio de nombre Asincrono");
 ```
+
 ### Módulo path
 
 Módulo q proporciona utilidades para trabajar con rutas de archivos y directorios. esta integrado al núcleo de Node y se puede usar solicitandolo `const path=require("node:path")`
+
 - dirname obtine la carpeta principal de un archivo
 - basename obtine la parte del nombre del archivo
 - extname obtiene la extension del archivo
 
 ```js
-const path=require("node:path");
-const ruta="./files/path.js";
+const path = require("node:path");
+const ruta = "./files/path.js";
 console.log(path.dirname(ruta));
 console.log(path.basename(ruta));
 console.log(path.extname(ruta));
 //puedes obtener el nombre del archivo sin la expension especificando un segundo argumento en basename
-console.log(path.basename(ruta,path.extname(ruta)));
-
-
+console.log(path.basename(ruta, path.extname(ruta)));
 ```
+
 Para unir 2 o mas partes de rutas puedes usar `path.join()`
+
 ```js
-const name="rosa";
-const join=path.join("/","users",name,"usuarios.txt");// /users/rosa/usuarios.txt
+const name = "rosa";
+const join = path.join("/", "users", name, "usuarios.txt"); // /users/rosa/usuarios.txt
 console.log(join);
 ```
+
 para crear rutas absolutas usar `path.resolve()`
+
 ```js
 console.log(path.resolve("path.js"));
 //si solo se coloca el  nombre del archivo crea la ruta absoluta al directorio actual
 //Si especificas una segunda carpeta de parametro , resolve utilizara la primera como base de la segunda
-console.log(path.resolve("introduccion","path.js"));// ....../introduccion/path.js
-//si ponemos "/" en el primer parametro lo toma como ruta absoluta 
-console.log(path.resolve("/introduccion","path.js"));// /introduccion/path.js
+console.log(path.resolve("introduccion", "path.js")); // ....../introduccion/path.js
+//si ponemos "/" en el primer parametro lo toma como ruta absoluta
+console.log(path.resolve("/introduccion", "path.js")); // /introduccion/path.js
 
 // NO COMPRUEBA SE LA RUTA EXUSTE. SOLO CANLCULA UNA RUTA EN FUNCION DE LA INFORMACION QUE SE SUMINISTRO
-
 ```
+
 ### Process.cwd()
 
 Devuelve un string con el directorio de trabajo actual del proceso de Node.js
 proccess.cwd() es un método de un objeto Global proccess, devuelve el valor del directorio donde ejecutamos el processo del node
-__dirmane no es global sino local para cada módulo., es decir devulve el valor del directorio donde reside el archivo q se está ejecutando actualmente
-process es un objeto global y cwd retorna donde se ejecuta el nodo 
-__dirname es de modulo y reprsenta la ruta del archivo del modulo
+**dirmane no es global sino local para cada módulo., es decir devulve el valor del directorio donde reside el archivo q se está ejecutando actualmente
+process es un objeto global y cwd retorna donde se ejecuta el nodo
+**dirname es de modulo y reprsenta la ruta del archivo del modulo
 
 ```js
-const {cwd} =require("node:process");
-console.log("cwd:",cwd());
+const { cwd } = require("node:process");
+console.log("cwd:", cwd());
 //devuelve el directorio desde el que se invocó el node comando
 
-console.log("__dirname ",__dirname);
+console.log("__dirname ", __dirname);
 //devuelve el nombre del directorio que continen el archivo de código fuente de JS
 
 /*
@@ -1261,16 +1269,19 @@ console.log("__dirname ",__dirname);
             
  */
 ```
-### __dirname 
-en un nodo devuelve la ruta de la carpeta donde reside el archivo JS actual. . Es decir el nombre del directorio del archivo q se está ejecutando actualmente. es lo mismo que path.dirname del __filename. 
-` console.log("path.dirname(__filename)",path.dirname(__filename));`
 
-### __filename n
+### \_\_dirname
+
+en un nodo devuelve la ruta de la carpeta donde reside el archivo JS actual. . Es decir el nombre del directorio del archivo q se está ejecutando actualmente. es lo mismo que path.dirname del **filename.
+` console.log("path.dirname(**filename)",path.dirname(\_\_filename));`
+
+### \_\_filename n
 
 Devuelve el nombre del archivo del código ejecitado y se proporciona la ruta absoluta del archivo de código
 `console.log("__filename",__filename);`
 
 ### CHOKIDAR
+
 ES un paquete de código abierto que permite observar archivos de código abierto para Node.js.Le asigna un conjunto de archivos,los observa para detectar cambios y notifica cada vez q se edita un archivo antiguo o se crea un archivo nuevo.Chikidar iniciará observadores de forma recursiva para todo que esté dentro del alcance de las rutas q se han especificado. Por lo que ojo con recursos del sistema.
 
 ## Aplicacion de linea de comando ⌨️​
@@ -1280,16 +1291,20 @@ Si te encuentras haciendo las mismas cosas una y otra vez, es probable q puedas 
 Node.js tiene bibliotecas intergradas para leer y escribir archivos , inicar otras aplicaiones y realizar comunicacion de red básicas.
 
 #### Para ejecutar un script desde caulquier lugar
-crea una carpeta e inicializala con `npm init`, crea una carpeta con el nombre bin 
+
+crea una carpeta e inicializala con `npm init`, crea una carpeta con el nombre bin
 t agrega en la carpeta un archivo `index.js` cola en el :
+
 ```js
  #!/usr/bin/env node
  console.log("first script ");
 ```
-La primera linea se llama shebang #!  seguida de la ruta al shell , es una secuencia de caracteres q se utiliza para indicar al sistema operativo que desea q use el script .El shell lo utilza para decidir q interprete ejecutara el resto del script. Normalmente sera :
+
+La primera linea se llama shebang #! seguida de la ruta al shell , es una secuencia de caracteres q se utiliza para indicar al sistema operativo que desea q use el script .El shell lo utilza para decidir q interprete ejecutara el resto del script. Normalmente sera :
 `#!/bin/bash o #!/usr/bin/env bash ` como la primera línea al escribir o leer scripts bash.
-Pero en nuestro caso vamos a usar para q los script de Node.js se isntalen y se ejecuten  correctamente en macOsy windows.
-En el package.json cambie la clave main por el valor bin/index.js  y agrege una nueva clave con bin con un comando y el script a ejecutar:
+Pero en nuestro caso vamos a usar para q los script de Node.js se isntalen y se ejecuten correctamente en macOsy windows.
+En el package.json cambie la clave main por el valor bin/index.js y agrege una nueva clave con bin con un comando y el script a ejecutar:
+
 ```js
 {
   "name": "first-app",
@@ -1307,71 +1322,90 @@ En el package.json cambie la clave main por el valor bin/index.js  y agrege una 
   }
 }
 ```
-Ahora se puede ejecutar el script como cualquier aplicacion de node `node .` desde la linea de comando .Para q el script se pueda ejecutar desde cualquier lugar . Debemos instalarlo globalmente
-`npm i -g` de esta forma. todos los comandos que aparecen en la seccion bin del package.json archivo estarán disponibles  como aplicacion de linea de comando. Es decir que puedes ejecutar el script colocando el comando "hola" en este caso.
-Para  desinstalar un script ejecuta el comando
-`npm uninstall -g [nombre de la carpeta del proyecto]`
-Para  ver todos los módulos node.js instalados globalmente ejecuta `npm ls -g --depth=0`
 
-> NOTA: Si no se ejecuta en powershell , abra la powershell como administrador compruebe con el comando "Get-ExecutionPolicy" si dice restricted tendra q modificar la configuración.Escriba en la terminal "Set-executionPolicy Unrestricted y a continuacion indique la respuesta para modificarla S 
+Ahora se puede ejecutar el script como cualquier aplicacion de node `node .` desde la linea de comando .Para q el script se pueda ejecutar desde cualquier lugar . Debemos instalarlo globalmente
+`npm i -g` de esta forma. todos los comandos que aparecen en la seccion bin del package.json archivo estarán disponibles como aplicacion de linea de comando. Es decir que puedes ejecutar el script colocando el comando "hola" en este caso.
+Para desinstalar un script ejecuta el comando
+`npm uninstall -g [nombre de la carpeta del proyecto]`
+Para ver todos los módulos node.js instalados globalmente ejecuta `npm ls -g --depth=0`
+
+> NOTA: Si no se ejecuta en powershell , abra la powershell como administrador compruebe con el comando "Get-ExecutionPolicy" si dice restricted tendra q modificar la configuración.Escriba en la terminal "Set-executionPolicy Unrestricted y a continuacion indique la respuesta para modificarla S
 
 ### Exitting / Exit Codes
 
 Forma de finalizar un proceso NOde mediante el módulo de proccess de node
+
 ```js
-const process=require("node:process");
-process.exitCode=1;//sera  codigo de salida del proceso cuando el proceso sale correctamente o se llama a process.exit()sin ningun codigo como param 
+const process = require("node:process");
+process.exitCode = 1; //sera  codigo de salida del proceso cuando el proceso sale correctamente o se llama a process.exit()sin ningun codigo como param
 
-process.exit();//si se pasa un código se anulara la configuracion de process.exitCode
-
+process.exit(); //si se pasa un código se anulara la configuracion de process.exitCode
 ```
-process.exit le indica a node que finalice el proceso de forma sincrónica con un estdo de codigo de salida. Se code se omite la salida utiliza el codigo exito o 0 o el valor de exitCode si se ha establecido.La llamada  de process.exit forzara al proceso al salir lo mas rápido posible incluso si todavia hay operacion asincrónas que o se han completado. La mayoria de las situaciones no es necesario llamar a process.exit(). El proceso Node saldrá por si solo si no hay trabajo adicional pendiente. La prodiedad process.exitCode se puede configuarra para indicarle al proceso q código de salida utilizar cuando el proceso es correcto.
+
+process.exit le indica a node que finalice el proceso de forma sincrónica con un estdo de codigo de salida. Se code se omite la salida utiliza el codigo exito o 0 o el valor de exitCode si se ha establecido.La llamada de process.exit forzara al proceso al salir lo mas rápido posible incluso si todavia hay operacion asincrónas que o se han completado. La mayoria de las situaciones no es necesario llamar a process.exit(). El proceso Node saldrá por si solo si no hay trabajo adicional pendiente. La prodiedad process.exitCode se puede configuarra para indicarle al proceso q código de salida utilizar cuando el proceso es correcto.
 
 #### evento exit
 
 El evento exit se emite cuando el proceso de Node esta a punto de salir como resultado de :
+
 - el llamdo exicito a process.exit()
 - el bucle de eventos de Node ya no tiene trabajo adicional
-No hay forma de evitar la salida. la funcion callback del oyente se invoca con el código de salida especificado por process.exitCode o en por el argumento pasado en process.exit(arg)
+  No hay forma de evitar la salida. la funcion callback del oyente se invoca con el código de salida especificado por process.exitCode o en por el argumento pasado en process.exit(arg)
+
 ```js
-const process=require("node:process");
-process.on("exit",(code)=>{
-    console.log("🔄Evento de salida del process ,code: ",code);
+const process = require("node:process");
+process.on("exit", (code) => {
+  console.log("🔄Evento de salida del process ,code: ", code);
 });
-process.exit();//por defecto cero 
+process.exit(); //por defecto cero
 ```
 
 ### Variables de entornos
 
-#### Process.env 
+Las varaibels de entrono nos permiten gestionar la configuración de nuestrasa aplicacions de forma independiente de nuestro código. Separar las configuraciones facilita la implementacion de nuestras aplicaiones en dif entornos.
+Las varaibles de entorno son varaibles externas a neustra aplicacion que residen en el sist operativo o en el contenedor donnde se ejecuta la aplicaion de produción.Debido a que el desarrolo se realiza principalmente en máquinas locales, las variables de entorno se colocan en entornos locales con comandos como ser o export , o se almacenan en el archivo local .env
+Por convenciom ,las varaibles de entorno se encriben en letra mayúsculas.Algunos datos de configuracion q se almacenan en varibles de entorno son:
+
+- peurto http
+- cadena de conexion de base de datos
+- ubicacion de archivos estáticos.
+  El archivo .env _nunca_ debe enviarse al repositorio de código
+
+#### Process.env
+
 es una variable global q se inyecta durante el tiempo de ejcución.
 Es una vuista del estado de las variables de entorno del sistema.Cuando
-configuramos una variable de entorno , se carga en process.env durante el tiempo de ejcución 
+configuramos una variable de entorno , se carga en process.env durante el tiempo de ejcución
 y se puede acceder a ella mas adelante.
-El process modulo de Node proporcion la propiead `env` que alberga todas las varaibels 
+El process modulo de Node proporcion la propiead `env` que alberga todas las varaibels
 de entorno que se configuran en el momento en que se inició el proceso.
 Para establecer la variable de entorna desde la linea de comando:
+
 - sistema linux/unix/mac
-`USER_ID=333333 USER_KEY=clave node process-env.js` sin espacios, Si lo divides, las variables no estarán disponibles para el proceso.
-- window Command Prompt 
-`set USER_ID=333333 && set USER_KEY=clave && node process-env.js` 
-- window poweshell 
-`$env:USER_ID="333333"; $env:USER_KEY="clave"; node process-env.js`
+  `USER_ID=333333 USER_KEY=clave node process-env.js` sin espacios, Si lo divides, las variables no estarán disponibles para el proceso.
+- window Command Prompt
+  `set USER_ID=333333 && set USER_KEY=clave && node process-env.js`
+- window poweshell
+  `$env:USER_ID="333333"; $env:USER_KEY="clave"; node process-env.js`
 
 y en el archivo podemos hacer uso de ellas:
+
 ```js
 console.log(process.env.USER_ID);
 console.log(process.env.USER_KEY);
-
 ```
+
 Las varaibels definidas en el comando son varaibles temporales asociadas al processo q ejecuta NOde.js y no varaibels de entorno del sitema o sesión.
 Este comando define las variables USER_ID y USER_KEY solo para el proceso que ejecuta node process-env.js. Estas variables están disponibles temporalmente para ese proceso de Node.js y no afectan el entorno global ni tu terminal después de que el comando se ejecute.
 Solo definen variables temporales disponibles para el proceso node process-env.js y eliminarse automáticamente cuando el proceso termina.(cuando cierres la terminal). Pero si quieres eliminar sin cerrar la asesion actual de Powershell puedes ejecutar en la powershell:
+
 ```
 Remove-Item Env:USER_ID
 Remove-Item Env:USER_KEY
 ```
+
 y luego comprobar con :
+
 ```
 Write-Output $env:USER_ID
 Write-Output $env:USER_KEY
@@ -1383,29 +1417,279 @@ Write-Output $env:USER_KEY
 Es un módulo de dependencia cero q carga variables de entorno desde un archivo `.env` a process.env.
 Si necesitras trabajar con variables de entorno con frecuencia, es mejor usar un archivo .env para almacenarlas y una libreria como dotenv para cargarlas en tu aplicacion.
 Para establecer variables de entorno con la libreria dotenv:
+
 1. instalo dotenv
-`npm install dotenv`
+   `npm install dotenv`
 2. creo un archivo .env en el mismo directorio con las variables de entorno
-`USER_ID=333333` 
-NO dejare espacio alrededor del= 
-NO uses comillas a menos q el valor contenga espacios o caracteres especiales 
+   `USER_ID=333333`
+   NO dejare espacio alrededor del=
+   NO uses comillas a menos q el valor contenga espacios o caracteres especiales
 3. usa dotnet en script para acceder a las variables de entorno
+
 ```js
-require('dotenv').config();
+require("dotenv").config();
 console.log(process.env.USER_ID);
 //recuerda configuara dotnenv al inicio de tu script para aseguar q todas las variables estén disponibles antes de usarlas
 ```
+
 4. ejecuta el script normalmente node [nombre del archivo ].js
-DE esta forma separamos la configuracion, las variables estan en un archivo dedicado a ello, no en el código. Ademas es mas seguro ya que podemos excluir el archivo .env del control de versiones añadiendolo en .gitignore con .env
-Y por ultimo puedes definir todas tus configuaraciones en el archivo .env y utilizarlas en multiples scripts
+   DE esta forma separamos la configuracion, las variables estan en un archivo dedicado a ello, no en el código. Ademas es mas seguro ya que podemos excluir el archivo .env del control de versiones añadiendolo en .gitignore con .env
+   Y por ultimo puedes definir todas tus configuaraciones en el archivo .env y utilizarlas en multiples scripts.
+
+### Input
+
+_Proccess.stdin_ es la entrada estándar del proceso. se trata de una secuencia legibloe estándar que escucha las esntradas del usaurio y a la q se puede accesder a través del módulo dse process. Utiliza on() para escuchar los eventos de entrada.
+
+```js
+const { stdin, stdout } = require("node:process");
+
+stdin.pipe(stdout); // valos a obtener informacion de la terminal y luego mostrarla en la pantalla con stdout
+//ahora ejecutamos en la terminal el archivo node stdin.js y a caundo escribimos y damos enter aparece lo q escribimos. Si quiero salir control +C
+```
+
+#### Package Inquirer.js
+
+es una coleccion de interfaces de linea de comando interactivas comunes para recibir entradas del usuario. Se base en promesas y admite la posibilidad de encadenar series de preguntas, recibir entrada de texto, casilla de verificacion , lista de opciones y mucgo más.
+Se puede usar para potenciar aplicacion de terminal q necesiten entrada del usuario o para crear su propia CLI.
+El paquete inquirer ofrece varios mensajes predeterminados y configurables.
+
+1. Instalacion del paquete
+   `npm install @inquirer/prompts`
+2. escribe los prompt en tu script
+
+```js
+import { input } from "@inquirer/prompts";
+import { select, Separator } from "@inquirer/prompts";
+import { checkbox } from "@inquirer/prompts";
+import { confirm } from "@inquirer/prompts";
+import { search } from "@inquirer/prompts";
+import { password } from "@inquirer/prompts";
+import { number } from "@inquirer/prompts";
+import { rawlist } from "@inquirer/prompts";
+
+//input
+const answer = await input({ message: "Cual es tu animal favorito 🤔?" });
+console.log(answer);
+
+//select
+const answer2 = await select({
+  message: "Selecciona tu segundo animal fav",
+  choices: [
+    { name: "🦋", value: "mariposa", description: "animal volador" },
+    { name: "🐘", value: "elefante" },
+    new Separator(),
+    { name: "🦄", value: "unicornio", description: "animal fantastico" },
+    { name: "🦇", value: "batman", description: "batmam" },
+  ],
+});
+console.log(answer2);
+
+//checkbox
+const answer3 = await checkbox({
+  message: "Selecciona uno de estos con barra espaciadora:",
+  choices: [
+    { name: "🐴", value: "caballo", disabled: true },
+    { name: "🐣", value: "pollito" },
+    { name: "🐍", value: "serpiente" },
+    new Separator(),
+    { name: "🐷", value: "chancho" },
+    { name: "🐭", value: "rata" },
+    { name: "🐳", value: "ballena" },
+  ],
+});
+console.log(answer3); //array con el value
+
+//confirm y/n
+const answer4 = await confirm({ message: "Desea continuar ?" });
+//si no usuamos await uso promesa
+// answer4
+// .then((s)=>console.log("then->",s))
+// .catch(console.error);
+console.log(answer4);
+
+//search
+const animals = [
+  "🐷​",
+  "🐆",
+  "​🐶",
+  "​🦍",
+  "🐮​",
+  "🐰​",
+  "🐍​",
+  "🐫​",
+  "🐈",
+  "​🦉",
+  "​🐑",
+  "​🦏",
+  "​🐟",
+  "​🕊️​",
+];
+const answer5 = await search({
+  message: "Search un animal",
+  source: async (input, { signal }) => {
+    if (!input) {
+      return animals;
+    }
+    const response = await animals.find((a) => a == { signal });
+    if (response) {
+      return [response];
+    }
+    return [];
+  },
+});
+console.log(answer5);
+
+//password
+const answer6 = await password({ message: "Ingresa clave 🐸", mask: "*" }); //si no indico propiedad mask no muestra como ingresamos la clave
+console.log(answer6);
+
+//number
+const answer7 = await number({ message: "Cuántos animales tienes", min: 0 });
+console.log(answer7);
+
+//raw list
+const answer8 = await rawlist({
+  message: "Elige uno",
+  choices: [
+    { name: "🐴", value: "caballo" },
+    { name: "🐣", value: "pollito" },
+    { name: "🐍", value: "serpiente" },
+  ],
+});
+console.log(answer8); // da el numero elegido
+```
+
+Documentacion oficial : [https://github.com/SBoudrias/Inquirer.js#readme](https://github.com/SBoudrias/Inquirer.js#readme)
+
+#### Package Prompts
+
+Es una interfaz de nivel superiops y facil de usar, contruida sobre el modulo integrado de node _Readline_ . Admite distinto tipos de inidcaciones, como texto, constraseña , autocompletar,fech,etc.Es un módulo interactivo y viene con soporte de valicion integrado
+
+1. instala el paquete
+   `npm i prompts`
+2. usa el paquete para codificar tu prompts
+
+```js
+const prompts = require("prompts");
+
+//funcion anonima autoinvocada para trabajar con async await desde commandjs
+(async () => {
+  const response = await prompts({
+    type: "number",
+    name: "edad",
+    message: "Cuantos años tienes?",
+    validate: (edad) => (edad < 18 ? "No se acepta menores de edad" : true),
+  });
+  console.log(response);
+})(); //{edad:22} si se responde con una respuesta q no pase la validacion el cursor sigue en la pregunta
+
+//Cadena de indicacions
+const answers = [
+  {
+    type: "text",
+    name: "nombre",
+    message: "Cual es tu nombre?",
+  },
+  {
+    type: "text",
+    name: "Apellido",
+    message: "Cual es tu apellido?",
+  },
+  {
+    type: "number",
+    name: "edad",
+    message: "Cual es tu edad?",
+  },
+];
+(async () => {
+  const response = await prompts(answers);
+  console.log(response);
+})();
+
+//DINAMICOS colocando null en la propiedades de type y fucniones
+const answers2 = [
+  { type: "text", name: "job", message: " trabajas actualmente?" },
+  {
+    type: (prev) => (prev == "si" ? "text" : null),
+    name: "lugar",
+    message: " donde trabajas ?",
+  },
+];
+
+(async () => {
+  const responde = await prompts(answers2);
+  console.log(responde);
+})();
+```
+### Output salida estándar
+
+La propiedad *process.stdout* es una interfaz de programacion de aplciaciones incorporadas del módulo de proceso q se utiliza para enviar datos desde nuestro programa.Un flujo de escritura a la salida stámdar.Implementa un método write(). Console.log()improme con process.stdout.write() salida formateada o nueva linea.
+al paracer console.log usa internamente .stdout.write y agrega un salto de lina
+```js
+ console.log = function (d) {
+   process.stdout.write(d + '\n');
+};
+```
+
+Una diferencia con console.log y stdout  es la  ultima solo toma arguemnto de cadena y Buffer(q retorna las peticiones http),y
+console.log cualquier tipo de datos de JS
+
+```js
+const fs= require("fs");
+process.stdout.write("Hola mundo"); 
+process.stdout.write("Hola mundo");
+//Hola mundoHolaMundo   ->NO  agrega salto de linea
+```
+*Backpressure o contrapresión*
+suele ocurrir cuando el software no puede procesar los datos de entrada a la 
+velocidad con la que llega. Si la velocidad de procesamiento de un nodo es lenta y la
+velocidad de entrada de datos es mayor q la salida se produce  backpressure.
+La backpressure es una técnica q se utiliza para evitar q un software o aplicacion use mas 
+recurso de los que hay disponible en una infraestructura
+Process.stdout permite detectar la contrapresion y escuchar el evento drain de forma  manual con process.
+stdout.write() o automática con stream.pipe(process.stdou)
+Si quisieras escribir un archivo enorme en la salida estandar
+
+```js
+const content=fs.readFileSync("./test.txt",{encoding:"utf-8"});
+console.log(content);
+console.log("---------------------------------");
+
+//primero se cargaria todo el contenido del archivo en memoria y luego comenzaria a escribir en stdou con 
+//console.log. 
+//Pero q pasa su si el archivo es mas grande q la memoria disponible. 
+fs.createReadStream("./test.txt").pipe(process.stdout);
 
 
+```
+ahora  el programa solo necesita leer en la memoria fragmentos relativamente pequeños , uno a la vez, a medida  q stdout los solicita:luego cada fragmento puede ser recolectado como basura. lo q hace q su programa use menos menoria
 
+####  CLI Progress package
+CLI-Progress es un paquete que proporciona una barra de progreso personalizada para aplicaciones CLI.
+```js
+const cliProgress=require("cli-progress");
+const  colors  =  require ( 'ansi-colors' ) ; //npm i ansi-colors
+//creo barra de progreso 
+const bar1= new  cliProgress . SingleBar ( { 
+    format: 'CLI Progress |'  +  colors . cyan ( '{bar}' )  +  '| {percentage}% || {value}/{total} Chunks || Speed: {speed}' , 
+    barCompleteChar : '\u2588' , 
+    barIncompleteChar : '\u2591' , 
+    hideCursor : true 
+} ) ;
+//Inicializo el token de carga bar.start(total,inicial,{objeto})
+bar1.start(200,0,{speed:"N/A"});
+//aumenta el valor actual  en una cantidad especificada y si no se pasa se incrementa en 1
+bar1.increment();
 
+//Actulizar el valor del progreso actual
+bar1.update(50);// no agrega si no q fija como valor total
+bar1.increment();// 51
 
+//Establece el valor de progreso total mientras la barra de progreso está activa.Util para gestionar tareas dinamicas
+bar1.setTotal(51);
 
+//detengo barra de progreso
+bar1.stop();
 
-
-
-
+```
 

@@ -1,0 +1,12 @@
+Una diferencia que no se ha mencionado todavía es que process.stdoutpermite detectar la contrapresión y escuchar 'drain'eventos, en caso de que quieras hacerlo, ya sea de forma manual process.stdout.write()o automática .stream.pipe(process.stdout)
+
+Imagina que quieres escribir un archivo enorme en la salida estándar. Si intentaras hacer esto:
+
+const content = fs.readFileSync('file.txt', { encoding: 'utf8' });
+console.log(content);
+Primero tendrías que cargar todo el contenido del archivo en la memoria y luego comenzarías a escribirlo en stdout a través de console.log(content). ¿Qué sucede si el archivo es más grande que la memoria disponible? ¿O simplemente quieres respetar el uso de memoria de tu programa?
+
+En lugar de eso, puedes hacer lo siguiente:
+
+fs.createReadStream('./example.txt').pipe(process.stdout);
+Ahora, su programa solo necesita leer en la memoria fragmentos relativamente pequeños, uno a la vez, a medida que stdout los solicita. Luego, cada fragmento puede ser recolectado como basura, lo que hace que su programa use una memoria mínima. Este es uno de los principales beneficios de Node Streams.
