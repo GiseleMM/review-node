@@ -1,0 +1,11 @@
+# POST http://localhost:3000/auth
+# Content-Type: application/json
+
+# {
+#     "user": "Rosa",
+#     "pass":12333
+# }
+
+
+GET http://localhost:3000/protegida
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJvc2EiLCJwYXNzd29yZCI6MTIzMzMsImlhdCI6MTczNjU1NjM5MSwiZXhwIjoxNzM2NTU2NDUxfQ.-cUVlsuPMyC3cL3Mr7JYmPeOEYdQGy4V2oj6kfVnHO4

@@ -38,3 +38,31 @@ bar2.increment();// 51
 
 
 bar2.stop();
+
+//BARRA MODO MULTIPLE
+
+//creo contendedor de barras
+const multibar=new cliProgress.MultiBar({
+clearOnComplete:false,
+hideCursor:true,
+format: ' {bar} | {filename} | {value}/{total}',
+},cliProgress.Presets.shades_grey);
+
+//agrego barras
+const b1=multibar.create(50,0);
+const b2=multibar.create(100,0);
+const b3=multibar.create(20,0);
+// log agrega comentario en la parte superior sin salto de linea (colocar antes de incrementaro update)
+multibar.log("💨\n");
+
+//barra de control 
+b1.increment();
+b2.update(20,{filename:"prueba.txt"});
+b3.update(18,{filename:"holamundo.txt"});
+
+//Remover una existente barra de un contenedor de multiples barras
+multibar.remove(b1);
+//log contenido en la parte superior de las multiples barras durante la operacion
+
+//detener todas las barras
+multibar.stop();

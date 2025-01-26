@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./parts/head"); %>
+  </head>
+  <body>
+    <header><%- include("./parts/nav"); %></header>
+
+    <main style="min-height: 90vh">
+        <h1>Index ejs 👻</h1>
+     
+        <h2>Hola <%=nombre %> <%=emoji %>
+        </h2>
+        <ul>
+            <!-- Arrays -->
+            <% mascotas.forEach(function(m){ %>
+                <li>
+                    <%=m %>
+                </li>
+                <% }); %>
+        </ul>
+    </main>
+  </body>
+
+  <!-- Pasar datos a vistas parciales a traves de varaibles aunque ya estan disponibles por que la incluyo con el padre (index pero OJO q todos las vistas la deberian pasar si hago uso de ellas)-->
+  <%- include("./parts/footer" ,{ variable:"mascostas"}); %>
+</html>
